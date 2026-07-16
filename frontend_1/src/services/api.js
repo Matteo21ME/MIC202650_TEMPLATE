@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { getToken, clearSession } from './session'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
+
 export const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
