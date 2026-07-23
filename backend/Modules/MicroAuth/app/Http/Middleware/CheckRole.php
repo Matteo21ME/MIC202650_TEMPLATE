@@ -27,9 +27,12 @@ class CheckRole
             return response()->json(['message' => 'Supervisor solo puede realizar consultas.'], 403);
         }
 
-        // Desarrollador: sin acceso a rutas de negocio sensibles
-        if ($roleName === 'Desarrollador' && str_contains($request->path(), 'procesos')) {
-            return response()->json(['message' => 'Desarrollador no tiene acceso a procesos de negocio.'], 403);
+        // Desarrollador: sin acceso a pacientes ni citas medicas
+        if (
+            $roleName === 'Desarrollador'
+            && ($request->is('api/v1/pacientes*') || $request->is('api/v1/citas-medicas*'))
+        ) {
+            return response()->json(['message' => 'Desarrollador no tiene acceso a pacientes ni citas medicas.'], 403);
         }
 
         // Verificar lista de roles permitidos para la ruta

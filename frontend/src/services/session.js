@@ -26,3 +26,5 @@ export const getToken        = () => session.token
 export const isAuthenticated = () => !!session.token
 export const userRole        = () => session.user?.role || null
 export const isAdmin         = () => session.user?.role === 'Administrador'
+export const isDeveloper     = () => session.user?.role === 'Desarrollador'
+export const isSupervisor    = () => session.user?.role === 'Supervisor'

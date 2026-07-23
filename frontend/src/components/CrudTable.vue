@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { userRole } from '@/services/session'
 
 const props = defineProps({
   titulo:      { type: String, required: true },
@@ -17,6 +18,7 @@ const props = defineProps({
 const emit = defineEmits(['delete'])
 
 const buscar = ref('')
+const readOnlyByRole = computed(() => userRole() === 'Supervisor')
 
 const rowsFiltrados = computed(() => {
   if (!buscar.value.trim()) return props.rows
@@ -64,7 +66,7 @@ function getCell(row, col) {
           <strong>Listado</strong>
           <span class="count">&nbsp;({{ rowsFiltrados.length }})</span>
         </div>
-        <RouterLink :to="createPath" class="btn-primary">+ {{ createLabel }}</RouterLink>
+        <RouterLink v-if="!readOnlyByRole" :to="createPath" class="btn-primary">+ {{ createLabel }}</RouterLink>
       </div>
 
       <!-- Loading -->
@@ -83,8 +85,9 @@ function getCell(row, col) {
             <tr v-for="row in rowsFiltrados" :key="row.id">
               <td v-for="col in columns" :key="col.key">{{ getCell(row, col) }}</td>
               <td class="td-actions">
-                <RouterLink :to="editPath(row)" class="btn-edit">Editar</RouterLink>
-                <button @click="emit('delete', row)" class="btn-delete">Eliminar</button>
+                <RouterLink v-if="!readOnlyByRole" :to="editPath(row)" class="btn-edit">Editar</RouterLink>
+
+                <button v-if="!readOnlyByRole" @click="emit('delete', row)" class="btn-delete">Eliminar</button>
               </td>
             </tr>
             <tr v-if="rowsFiltrados.length === 0">

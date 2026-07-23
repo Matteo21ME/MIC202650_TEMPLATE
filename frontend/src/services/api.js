@@ -35,3 +35,9 @@ const crud = (prefix) => ({
 
 export const userService = crud('usuarios')
 export const roleService = { getAll: () => api.get('/roles') }
+
+export const pacienteService = crud('pacientes')
+export const medicoService = crud('medicos')
+export const especialidadService = crud('especialidades')
+export const consultorioService = crud('consultorios')
+export const citaMedicaService = crud('citas-medicas')

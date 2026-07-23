@@ -10,4 +10,4 @@ Route::get('/{any}', function () {
             ->header('Content-Type', 'text/html');
     }
     return response('Frontend no compilado. Ejecuta: npm run build', 503);
-})->where('any', '.*');
+})->where('any', '^(?!api).*$');

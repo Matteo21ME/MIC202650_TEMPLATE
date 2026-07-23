@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { session, isAdmin } from '@/services/session'
+import { session, isAdmin, isDeveloper, isSupervisor } from '@/services/session'
 import { logout } from '@/services/auth'
 
 const route   = useRoute()
@@ -46,7 +46,12 @@ async function onLogout() {
 
       <div class="nav-links">
         <!--<RouterLink to="/home"             :class="{ active: route.name === 'home' }">Inicio</RouterLink>-->
-        <RouterLink to="/roles"        :class="{ active: isActive('/roles') }">Roles</RouterLink>
+        <RouterLink v-if="!isDeveloper()" to="/pacientes" :class="{ active: isActive('/pacientes') }">Pacientes</RouterLink>
+        <RouterLink to="/medicos"      :class="{ active: isActive('/medicos') }">Medicos</RouterLink>
+        <RouterLink to="/especialidades" :class="{ active: isActive('/especialidades') }">Especialidades</RouterLink>
+        <RouterLink to="/consultorios" :class="{ active: isActive('/consultorios') }">Consultorios</RouterLink>
+        <RouterLink v-if="!isDeveloper()" to="/citas" :class="{ active: isActive('/citas') }">Citas</RouterLink>
+        <RouterLink v-if="!isDeveloper() && !isSupervisor()" to="/roles" :class="{ active: isActive('/roles') }">Roles</RouterLink>
         <RouterLink v-if="isAdmin()" to="/usuarios" :class="{ active: isActive('/usuarios') }">Usuarios</RouterLink>
       </div>
 
