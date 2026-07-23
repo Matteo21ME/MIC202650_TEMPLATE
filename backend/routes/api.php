@@ -1,22 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 
-// Autenticacion (publica)
-Route::post('/auth/login', [AuthController::class, 'login']);
+/*
+|--------------------------------------------------------------------------
+| API Routes (raíz)
+|--------------------------------------------------------------------------
+|
+| Las rutas de cada módulo están definidas en sus propios archivos:
+|   - Modules/MicroAuth/routes/api.php   → /api/v1/auth/*, /api/v1/usuarios/*, /api/v1/roles
+|   - Modules/MicroBusiness/routes/api.php → /api/v1/business/*
+|
+| Aquí solo se registran rutas transversales (health check, etc.).
+|
+*/
 
-// Rutas protegidas: requieren token valido
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
-    Route::get('/auth/me', [AuthController::class, 'me']);
+Route::get('/health', fn () => response()->json(['status' => 'ok', 'timestamp' => now()->toIso8601String()]));
 
-    Route::middleware('role:Administrador, Desarrollador, Supervisor')->group(function () {
-        Route::get('roles', [RoleController::class, 'index']);
-        Route::get('usuarios', [UserController::class, 'index']);
-    });
-
-});

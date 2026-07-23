@@ -114,6 +114,46 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        // ── Módulo: MicroAuth ─────────────────────────────────────────────────
+        // En desarrollo puede apuntar a la misma BD. En producción, base de datos propia.
+        'microauth' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_AUTH_HOST',     env('DB_HOST', '127.0.0.1')),
+            'port'      => env('DB_AUTH_PORT',     env('DB_PORT', '3306')),
+            'database'  => env('DB_AUTH_DATABASE', env('DB_DATABASE', 'micro_auth')),
+            'username'  => env('DB_AUTH_USERNAME', env('DB_USERNAME', 'root')),
+            'password'  => env('DB_AUTH_PASSWORD', env('DB_PASSWORD', '')),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+            'prefix_indexes' => true,
+            'strict'    => true,
+            'engine'    => null,
+            'options'   => extension_loaded('pdo_mysql') ? array_filter([
+                (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        // ── Módulo: MicroBusiness ─────────────────────────────────────────────
+        // En desarrollo puede apuntar a la misma BD. En producción, base de datos propia.
+        'microbusiness' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_BUSINESS_HOST',     env('DB_HOST', '127.0.0.1')),
+            'port'      => env('DB_BUSINESS_PORT',     env('DB_PORT', '3306')),
+            'database'  => env('DB_BUSINESS_DATABASE', env('DB_DATABASE', 'micro_business')),
+            'username'  => env('DB_BUSINESS_USERNAME', env('DB_USERNAME', 'root')),
+            'password'  => env('DB_BUSINESS_PASSWORD', env('DB_PASSWORD', '')),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+            'prefix_indexes' => true,
+            'strict'    => true,
+            'engine'    => null,
+            'options'   => extension_loaded('pdo_mysql') ? array_filter([
+                (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
     ],
 
     /*

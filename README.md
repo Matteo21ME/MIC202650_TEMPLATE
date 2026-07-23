@@ -1,4 +1,4 @@
-# MIC202650
+<# MIC202650
 
 Aplicación web full-stack con **Laravel 12** (API REST + Sanctum) como backend y **Vue 3** (Vite) como frontend, con sistema de autenticación y control de acceso basado en roles.
 

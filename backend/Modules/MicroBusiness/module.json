@@ -1,0 +1,11 @@
+{
+    "name": "MicroBusiness",
+    "alias": "microbusiness",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MicroBusiness\\Providers\\MicroBusinessServiceProvider"
+    ],
+    "files": []
+}

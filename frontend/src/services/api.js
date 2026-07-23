@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getToken, clearSession } from './session'
 
 export const api = axios.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -33,5 +33,5 @@ const crud = (prefix) => ({
   delete:  (id)       => api.delete(`/${prefix}/${id}`),
 })
 
-export const userService         = crud('usuarios')
-export const roleService         = { getAll: () => api.get('/roles') }
+export const userService = crud('usuarios')
+export const roleService = { getAll: () => api.get('/roles') }

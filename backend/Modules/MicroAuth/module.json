@@ -1,0 +1,11 @@
+{
+    "name": "MicroAuth",
+    "alias": "microauth",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MicroAuth\\Providers\\MicroAuthServiceProvider"
+    ],
+    "files": []
+}
